@@ -47,13 +47,21 @@ const Form = () => {
       .then((response) => {
         console.log("succesful", response);
         setPost(response.data); // not usually done!!
-      })
+        
+        setNewUser ({
+          name: "",
+          email: "",
+          password: "",
+          terms: false
+        }
+      )})
+
       .catch((error) => {
         console.log("this is an error", error);
         setErrors(error.data);
       });
   };
-
+  
   //All validation coding below:
   const formSchema = yup.object().shape({
     name: yup
@@ -104,6 +112,7 @@ const Form = () => {
           type="text"
           value={newUser.name}
           onChange={inputChange}
+          data-cy="name"
         />
       </label>
       <label htmlFor="email">
@@ -118,6 +127,8 @@ const Form = () => {
           type="email"
           value={newUser.email}
           onChange={inputChange}
+          data-cy="email"
+
         />
       </label>
       <label htmlFor="password">
@@ -129,6 +140,8 @@ const Form = () => {
           type="password"
           value={newUser.password}
           onChange={inputChange}
+          data-cy="password"
+
         />
       </label>
       <label htmlFor="terms" className="terms">
@@ -141,7 +154,7 @@ const Form = () => {
         />
         Terms
       </label>
-      <button type="submit" disabled={buttonOn}>
+      <button type="submit" disabled={buttonOn} data-cy="submit">
         Submit
       </button>
           <pre>{JSON.stringify(post, null, 2)}</pre>
